@@ -247,7 +247,7 @@ function playIconUpdate(val)
 			isPlaySlotVisible();
 			audioPlayer.pause();
             isPause=true;
-			playIconUpdate(true);
+			playIconUpdate(false);
 		}
 	     function convertSecondstoTime(given_seconds) { 
           
