@@ -11,17 +11,18 @@
  var speech = {
       start : function () {
       // speech.start() : start speech recognition
-
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        var txt=document.getElementById('description').value;
+        const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
         speech.recognition = new SpeechRecognition();
         speech.recognition.continuous = true;
         speech.recognition.interimResults = false;
-        speech.recognition.lang = "gu-GU";
+        speech.recognition.lang = "gu";
         speech.recognition.onerror = function (evt) {
           console.log(evt);
         };
         speech.recognition.onresult = function (evt) {
-          document.getElementById('description').value = evt.results[0][0].transcript;
+			
+          document.getElementById('description').value = txt + evt.results[0][0].transcript;
           speech.stop();
         };
         speech.recognition.start();
