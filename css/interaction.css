@@ -1,0 +1,22 @@
+/* Body Background */
+body{
+	margin-top: 20px;
+	background-color: #d5d9de;
+}
+
+/* Text Style */
+p{
+	color: #656565;
+}
+
+/* Bootstrap Container */
+.container{
+	background-color: white;
+	box-shadow: 0 0 5px #9d9d9d;
+}
+
+/* Responsive Video */
+video{
+	width: 100%;
+	height: 100%;
+}
