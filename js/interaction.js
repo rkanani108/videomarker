@@ -16,12 +16,12 @@
         speech.recognition = new SpeechRecognition();
         speech.recognition.continuous = true;
         speech.recognition.interimResults = false;
-        speech.recognition.lang = "gu-IN";
+        speech.recognition.lang = "gu-GU";
         speech.recognition.onerror = function (evt) {
           console.log(evt);
         };
         speech.recognition.onresult = function (evt) {
-          document.getElementById('description').value= evt.results[0][0].transcript;
+          document.getElementById('description').value = evt.results[0][0].transcript;
           speech.stop();
         };
         speech.recognition.start();
