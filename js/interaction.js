@@ -11,7 +11,7 @@
  var speech = {
       start : function () {
       // speech.start() : start speech recognition
-        var txt=document.getElementById('description').value;
+        var txt=document.querySelector('#description').value;
         const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
         speech.recognition = new SpeechRecognition();
         speech.recognition.continuous = true;
@@ -22,7 +22,7 @@
         };
         speech.recognition.onresult = function (evt) {
 			
-          document.getElementById('description').value = txt + evt.results[0][0].transcript;
+          document.querySelector('#description').value = txt + " "+evt.results[0][0].transcript;
           speech.stop();
         };
         speech.recognition.start();
@@ -50,13 +50,13 @@
 
         // [2] ASK FOR USER PERMISSION TO ACCESS MICROPHONE
         // WILL ALSO FAIL IF NO MICROPHONE IS ATTACHED TO COMPUTER
-        // navigator.mediaDevices.getUserMedia({ audio: true })
-        // .then(function(stream) {
-          // document.getElementById("search-on").disabled = false;
-        // })
-        // .catch(function(err) {
-          // document.getElementById("search-speech").innerHTML = "Please enable access and attach a microphone";
-        // });
+         navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(function(stream) {
+         document.getElementById("search-on").disabled = false;
+         })
+         .catch(function(err) {
+          document.getElementById("search-speech").innerHTML = "Please enable access and attach a microphone";
+         });
       }
     });
 
