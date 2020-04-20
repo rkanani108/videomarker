@@ -20,3 +20,23 @@ video{
 	width: 100%;
 	height: 100%;
 }
+
+input#fromTime + *:before {
+    content: "click to move";
+    font-size: 10px;
+    color: #c2c3c3;
+    position: absolute;
+    top: -1px;
+    z-index: 1;
+    left: 60px;
+}
+
+input#toTime + *:after {
+    content: "click to move";
+    font-size: 10px;
+    color: #c2c3c3;
+    position: absolute;
+    top: -1px;
+    z-index: 1;
+    left: 60px;
+}

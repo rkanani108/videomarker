@@ -68,15 +68,16 @@
 			
 			<div class="input-group my-2 mt-4">
 			 
+
                 <div class="input-group-prepend">
                     <button class="btn btn-secondary" style="padding: 6px;" type="button" onclick="onFromClick()">Start</button>
                 </div>
+				
                 <input id="fromTime" type="text" onclick="fromGoToTime()" class="form-control"  readonly>
-                
-                <div class="input-group-prepend">
+                 <div class="input-group-prepend">
                     <button class="btn btn-secondary"  type="button" onclick="onToClick()">End</button>
                 </div>
-                <input id="toTime" type="text" onclick="toGoToTime()" class="form-control" readonly>
+                <input id="toTime"  type="text" onclick="toGoToTime()" class="form-control" readonly>
 				
 
                 <input id="fromTimeSecond" type="hidden" class="form-control" >
@@ -85,7 +86,18 @@
 
 
             </div>
-			
+			 <!-- [VOICE CONTROL BUTTON] -->
+   
+  
+		 <form id="search-form" onsubmit="return false">
+   
+      <!-- SPEECH RECOGNITION -->
+		  <div id="search-speech" style="display:none" class="text-right">
+		   
+			<input type="button" disabled id="search-on" value="Speak" onclick="speech.start()"/>
+			<input type="button" disabled id="search-off" value="Stop" onclick="speech.stop()"/>
+		  </div>
+		</form>
             <div class="form-group text-left">
 
                 <label>Description:</label>
@@ -165,6 +177,7 @@
 
 	<script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script type="text/javascript"  src="http://www.google.com/jsapi"></script>
 
 	<!-- Custom JS -->
 	<script src="js/interaction.js"></script>
