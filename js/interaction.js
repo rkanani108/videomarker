@@ -243,7 +243,11 @@ function playIconUpdate(val)
 			 var timeString= convertSecondstoTime(currentTime);
 			 document.querySelector('#toTimeSecond').value  = currentTime; 
 			 document.querySelector('#toTime').value  = timeString;
-			 isPlaySlotVisible();
+			 
+			isPlaySlotVisible();
+			audioPlayer.pause();
+            isPause=true;
+			playIconUpdate(true);
 		}
 	     function convertSecondstoTime(given_seconds) { 
           
