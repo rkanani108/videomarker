@@ -499,6 +499,7 @@ function playIconUpdate(val)
 			document.querySelector('#fromTimeSecond').value="";
 			document.querySelector('#toTimeSecond').value="";
 			document.querySelector('#uniqueId').value ="";
+			document.querySelector('#playSlot').classList.add("d-none");
 		}
 		function uuidv4() {
 		  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -516,4 +517,6 @@ function playIconUpdate(val)
 			localStorage.clear();
 			refreshGrid();
 		}
+		
+		
 
