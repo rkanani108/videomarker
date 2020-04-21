@@ -21,22 +21,37 @@ video{
 	height: 100%;
 }
 
-input#fromTime + *:before {
-    content: "click to move";
-    font-size: 10px;
-    color: #c2c3c3;
-    position: absolute;
-    top: -1px;
-    z-index: 1;
-    left: 60px;
+.link-wrapper
+{
+	
 }
 
-input#toTime + *:after {
-    content: "click to move";
-    font-size: 10px;
-    color: #c2c3c3;
-    position: absolute;
-    top: -1px;
-    z-index: 1;
-    left: 60px;
-}
+/* #playSlot:after { */
+    /* content: "Play note"; */
+    /* font-size: 10px; */
+    /* position: relative; */
+    /* top: 18px; */
+    /* color: black; */
+    /* left: -30px; */
+	/* width:10px */
+/* } */
+
+/* input#fromTime + *:before { */
+    /* content: "click to move"; */
+    /* font-size: 10px; */
+    /* color: #c2c3c3; */
+    /* position: absolute; */
+    /* top: -1px; */
+    /* z-index: 1; */
+    /* left: 60px; */
+/* } */
+
+/* input#toTime + *:after { */
+    /* content: "click to move"; */
+    /* font-size: 10px; */
+    /* color: #c2c3c3; */
+    /* position: absolute; */
+    /* top: -1px; */
+    /* z-index: 1; */
+    /* left: 60px; */
+/* } */

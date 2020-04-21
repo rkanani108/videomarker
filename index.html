@@ -20,13 +20,29 @@
 
 	<div class="container">
 	<div class="row text-center">
+	
 	<div class="card col-md-6 col-sm-12 text-center">
+	
 			<div class="row card-header">
-				<h4>Audio Marker</h4>
-			</div>
-			<div class="card-body">
 			
-			<div class="row input-group">
+				<h4 class="col-7">Audio Marker</h4>
+				<div class=" col-5 link-wrapper">
+				    <div class="row m-1 d-md-inline-block d-none d-sm-block ">
+						<a target="_blank" href="https://chrome.google.com/webstore/detail/google-input-tools/mclkkofklkfljcocdinagocijmpgbhab/related" class="badge badge-info mr-1">Keyboard Tool </a>
+						<a target="_blank" href="https://chrome.google.com/webstore/detail/voice-in-voice-typing/pjnefijmagpdjfhhkpljicbbpicelgko" class="badge badge-info">Voice Tool</a>
+					</div>
+					
+					<div class="row m-1 d-block d-sm-none">
+						<a target="_blank" href="https://play.google.com/store/apps/details?id=com.google.android.apps.inputmethod.hindi&hl=en" class="badge badge-info">Indic Keyboard</a>
+					</div>
+				</div>
+			</div>
+			<div class="card-body pt-3">
+			<span class="badge badge-secondary" type="button" onclick="speed(0.80)">Slow 0.80 <i class="fa fa-arrow-down" aria-hidden="true"></i> </span>
+            <span class="badge badge-secondary" type="button" onclick="speed(1)">Normal 1.0 </span>
+            <span class="badge badge-secondary" type="button" onclick="speed(1.25)">Fast 1.25 <i class="fa fa-arrow-up" aria-hidden="true"></i> </span>
+		
+			<div class="row input-group mt-3">
 			  <div class="custom-file w-100">
 				<input type="file" class="custom-file-input" onchange="setLocalAudio()">
 				<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
@@ -37,10 +53,7 @@
 			</div>
 			
 				
-			<span class="badge badge-secondary" type="button" onclick="speed(0.80)">Slow  <i class="fa fa-arrow-down" aria-hidden="true"></i> </span>
-            <span class="badge badge-secondary" type="button" onclick="speed(1)">Normal </span>
-            <span class="badge badge-secondary" type="button" onclick="speed(1.25)">Fast  <i class="fa fa-arrow-up" aria-hidden="true"></i> </span>
-		    <div class="row py-3">
+			    <div class="row py-3">
 				<audio id="audioPlayer" class="w-100" controls>
 					<source src="" type="audio/mpeg">
 					Your browser does not support this type of audio. 
@@ -49,11 +62,11 @@
 			
 			<div class="row">
 			    <div class="col text-left">
-					<button class="btn btn-sm btn-secondary" type="button" onclick="playAudio()">Play <i id="play" class="fa fa-play"></i> </button>
-					<button class="btn btn-sm btn-info px-3 py-0 d-none" id="playSlot" type="button" onclick="playStartEnd()"><i class="fa fa-play-circle fa-2x"></i></button>
+					<button class="btn btn-sm btn-secondary" type="button" onclick="playAudio()">Play &nbsp;<i id="play" class="fa fa-play"></i> </button>
+					<button class="btn btn-sm btn-info d-none" id="playSlot" type="button" onclick="playStartEnd()"><i class="fa fa-play-circle fa-1x"></i> Note</button>
 				</div>
 			
-				<div class="col text-right input-group number-spinner">
+				<div class="col-5 text-right input-group number-spinner w-25">
 					<span class="input-group-btn">
 						<button class="btn btn-sm  btn-secondary" onclick="backward()"><i class="fa fa-backward"></i></button>
 					</span>
@@ -92,11 +105,11 @@
 		 <form id="search-form" onsubmit="return false">
    
       <!-- SPEECH RECOGNITION -->
-		  <div id="search-speech" style="display:none" class="text-right">
+		  <!-- <div id="search-speech" style="display:none" class="text-right"> -->
 		   
-			<input type="button" disabled id="search-on" value="Speak" onclick="speech.start()"/>
-			<input type="button" disabled id="search-off" value="Stop" onclick="speech.stop()"/>
-		  </div>
+			<!-- <input type="button" disabled id="search-on" value="Speak" onclick="speech.start()"/> -->
+			<!-- <input type="button" disabled id="search-off" value="Stop" onclick="speech.stop()"/> -->
+		  <!-- </div> -->
 		</form>
             <div class="form-group text-left">
 
