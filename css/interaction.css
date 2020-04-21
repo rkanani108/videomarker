@@ -1,9 +1,13 @@
 /* Body Background */
 body{
-	margin-top: 20px;
+	
 	background-color: #d5d9de;
 }
-
+@media (min-width: 768px) {
+	body{
+		margin-top: 20px !important;
+	}
+}
 /* Text Style */
 p{
 	color: #656565;
