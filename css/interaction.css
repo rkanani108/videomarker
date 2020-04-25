@@ -29,7 +29,22 @@ video{
 {
 	
 }
-
+button#btnStartTime::before {
+    content: "Start Time";
+    position: absolute;
+    top: -30px;
+    width: 144px;
+    left: -37px;
+    color: #212529;
+}
+button#btnEndTime::before {
+    content: "End Time";
+    position: absolute;
+    top: -30px;
+    width: 144px;
+    left: -37px;
+    color: #212529;
+}
 /* #playSlot:after { */
     /* content: "Play note"; */
     /* font-size: 10px; */

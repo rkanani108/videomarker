@@ -38,11 +38,14 @@
 					</div>
 				</div>
 			</div>
+			
+
 			<div class="card-body pt-3">
-			<span class="badge badge-secondary" type="button" onclick="speed(0.80)">Slow 0.80 <i class="fa fa-arrow-down" aria-hidden="true"></i> </span>
-            <span class="badge badge-secondary" type="button" onclick="speed(1)">Normal 1.0 </span>
-            <span class="badge badge-secondary" type="button" onclick="speed(1.25)">Fast 1.25 <i class="fa fa-arrow-up" aria-hidden="true"></i> </span>
-		
+			
+				<span class="badge badge-secondary" type="button" onclick="speed(0.80)">Slow 0.80 <i class="fa fa-arrow-down"></i> </span>
+				<span class="badge badge-secondary" type="button" onclick="speed(1)">Normal 1.0 </span>
+				<span class="badge badge-secondary" type="button" onclick="speed(1.25)">Fast 1.25 <i class="fa fa-arrow-up"></i> </span>
+			
 			<div class="row input-group mt-3">
 			  <div class="custom-file w-100">
 				<input type="file" class="custom-file-input" onchange="setLocalAudio()">
@@ -80,18 +83,19 @@
 			<hr>
 			<!-- from to click-->
 			
-			<div class="input-group my-2 mt-4">
+			<div class="input-group my-2 mt-5">
 			 
-
+               
                 <div class="input-group-prepend">
-                    <button class="btn btn-secondary" style="padding: 6px;" type="button" onclick="onFromClick()">Start</button>
+                    <button  id="btnStartTime" class="btn btn-secondary" style="padding: 6px;" type="button" onclick="onFromClick()">Start</button>
                 </div>
+				<input id="fromTime" type="text" onclick="fromGoToTime()" class="form-control"  readonly>
 				
-                <input id="fromTime" type="text" onclick="fromGoToTime()" class="form-control"  readonly>
-                 <div class="input-group-prepend">
-                    <button class="btn btn-secondary"  type="button" onclick="onToClick()">End</button>
-                </div>
-                <input id="toTime"  type="text" onclick="toGoToTime()" class="form-control" readonly>
+				
+						 <div class="input-group-prepend">
+						<button id="btnEndTime" class="btn btn-secondary"  type="button" onclick="onToClick()">End</button>
+					</div>
+					<input id="toTime"  type="text" onclick="toGoToTime()" class="form-control" readonly>
 				
 
                 <input id="fromTimeSecond" type="hidden" class="form-control" >

@@ -226,8 +226,20 @@ function playIconUpdate(val)
             var input = document.querySelector("input[type=file]");
             var url = URL.createObjectURL(input.files[0]);
             audioPlayer.src = url;
-            localStorage.setItem("filename", input.files[0].name);
+          	
 			document.querySelector("#fname").innerText=input.files[0].name;
+			var oldFileName=localStorage.getItem("filename");
+		    var lastTime=localStorage.getItem('lastTime');
+			if(!isEmpty(lastTime))
+			{
+				if(!isEmpty(oldFileName) && (input.files[0].name === oldFileName))
+				{
+					audioPlayer.currentTime=lastTime;
+				}
+				
+		    }
+			
+			localStorage.setItem("filename", input.files[0].name);
        }
 	   
 	   function speed(rate)
@@ -518,5 +530,12 @@ function playIconUpdate(val)
 			refreshGrid();
 		}
 		
-		
+	//Detect Browser or Tab Close Events
+$(window).on('beforeunload',function(e) {
+  e = e || window.event; 
+  
+     var audioPlayer = document.querySelector("#audioPlayer");
+     var rate=audioPlayer.currentTime;
+     localStorage.setItem('lastTime',rate);
+});	
 
