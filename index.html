@@ -26,7 +26,7 @@
 	
 			<div class="row card-header">
 			
-				<h4>Audio Marker</h4>
+				<h4>Video Marker</h4>
 				<div class=" col-5 link-wrapper">
 				    <div class="row m-1 d-md-inline-block d-none d-sm-block ">
 						<a target="_blank" href="https://chrome.google.com/webstore/detail/google-input-tools/mclkkofklkfljcocdinagocijmpgbhab/related" class="badge badge-info mr-1">Keyboard Tool </a>
@@ -46,7 +46,7 @@
 				<span class="badge badge-secondary" type="button" onclick="speed(1)">Normal 1.0 </span>
 				<span class="badge badge-secondary" type="button" onclick="speed(1.25)">Fast 1.25 <i class="fa fa-arrow-up"></i> </span>
 			
-			<div class="row input-group mt-3">
+			<div class="row input-group mt-3" style="display: none;">
 			  <div class="custom-file w-100">
 				<input type="file" class="custom-file-input" onchange="setLocalAudio()">
 				<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
@@ -57,11 +57,14 @@
 			</div>
 			
 				
-			    <div class="row py-3">
-				<audio id="audioPlayer" class="w-100" controls>
+			<div class="row py-3">
+				<audio id="audioPlayer" class="w-100" controls style="display: none;">
 					<source src="" type="audio/mpeg">
 					Your browser does not support this type of audio. 
 				</audio>
+				<div id="player"></div>
+				<a href="#" id="pause">Pause</a>
+				<a href="#" id="resume">Resume</a>
 		    </div>
 			
 			<div class="row">

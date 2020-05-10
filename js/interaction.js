@@ -62,7 +62,27 @@
 
 
 
-
+	var tag = document.createElement('script');
+	tag.src = "http://www.youtube.com/player_api";
+	var firstScriptTag = document.getElementsByTagName('script')[0];
+	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+	
+	// 3. This function creates an <iframe> (and YouTube player)
+	//    after the API code downloads.
+	var player;
+	function onYouTubePlayerAPIReady() {
+		player = new YT.Player('player', {
+			height: '315',
+			width: '560',
+			videoId: 'tQVMK307h9E',
+		});
+		document.getElementById('resume').onclick = function() {
+			player.playVideo();
+		};
+		document.getElementById('pause').onclick = function() {
+			player.pauseVideo();
+		};
+	}
 
 
 
@@ -84,17 +104,16 @@ function playStartEnd()
 			var to=document.querySelector('#toTimeSecond').value;
 			var delaySec = to - from;
 			var delayMillis = delaySec * 1000;
-            var audioPlayer = document.querySelector("#audioPlayer");
-            audioPlayer.currentTime = from;
+            player.seekTo(from); 
 			if(isPause)
 			{
-              audioPlayer.play();
+			  player.playVideo();
 			  isPause=false;
 			  playIconUpdate(true);
 			}
 			else
 			{
-				audioPlayer.pause();
+				player.pauseVideo();
 				isPause=true;
 				playIconUpdate(false);
 				return;
@@ -103,120 +122,87 @@ function playStartEnd()
 			
 			
             setTimeout(function () {
-                audioPlayer.pause();
+                player.pauseVideo();
 				isPause=true;
 				playIconUpdate(false);
                
             }, delayMillis);
 	
 }
-
-
-function fromGoToTime()
+function onFromClick()
 {
-	var from=document.querySelector('#fromTimeSecond').value;
-	if(!isEmpty(from))
-	{
-		var audioPlayer = document.querySelector("#audioPlayer");
-		audioPlayer.currentTime = from;
-        audioPlayer.pause();
-		isPause=true;
-		playIconUpdate(false);
-	}
-	
-}
-function toGoToTime()
-{
-	var to=document.querySelector('#toTimeSecond').value;
-	if(!isEmpty(to))
-	{
-		var audioPlayer = document.querySelector("#audioPlayer");
-		audioPlayer.currentTime = to;
-        audioPlayer.pause();
-		isPause=true;
-		playIconUpdate(false);
-	}
+	 //var audioPlayer = document.querySelector("#audioPlayer");
+	 var currentTime= player.getCurrentTime();   //audioPlayer.currentTime;
+	 var timeString= convertSecondstoTime(currentTime);
+	 document.querySelector('#fromTimeSecond').value  = currentTime; 
+	 document.querySelector('#fromTime').value  = timeString;
+	 
+	 isPlaySlotVisible();
+	 
+
 }
 
-function playIconUpdate(val)
+function onToClick()
 {
-	if(val)
-	{
-			document.querySelector('#playSlot i').classList.remove("fa-play-circle");
-			document.querySelector('#playSlot i').classList.add("fa-pause-circle");
-			document.querySelector("#play").classList.remove('fa-play');
-		    document.querySelector("#play").classList.add('fa-pause');
-	}
-	else
-	{
-		    document.querySelector('#playSlot i').classList.add("fa-play-circle");
-			document.querySelector('#playSlot i').classList.remove("fa-pause-circle");
-			document.querySelector("#play").classList.add('fa-play');
-		    document.querySelector("#play").classList.remove('fa-pause');
-	}
-	
+	//var audioPlayer = document.querySelector("#audioPlayer");
+	var currentTime= player.getCurrentTime(); //audioPlayer.currentTime;
+	var timeString= convertSecondstoTime(currentTime);
+	document.querySelector('#toTimeSecond').value  = currentTime; 
+	document.querySelector('#toTime').value  = timeString;
+	 
+	isPlaySlotVisible();
+	player.pauseVideo();
+	isPause=true;
+	playIconUpdate(false);
 }
 
- function refreshGrid()
- {
-	     
-	        var list=[];
-			var storageData=localStorage.getItem('audioData');
-			var selector=document.querySelector('table tbody');
-			if(!isEmpty(storageData))
+		function fromGoToTime()
+		{
+			var from=document.querySelector('#fromTimeSecond').value;
+			if(!isEmpty(from))
 			{
-				
-				list=JSON.parse(storageData);
-				
-				
-				
-				var rows="";
-				for (i = 0; i < list.length; i++) {
-					var row="<tr>"
-					//row += "<td>"+list[i].id + "</td>";
-					row += "<td>"+list[i].fromTime + "</td>";
-					row += "<td>"+list[i].toTime + "</td>";
-					row += "<td>"+list[i].description + "</td>";
-					row += "<td class='text-center'> <i class='fa fa-pencil' data-uniqueId='"+list[i].id+"'  onclick='editNote(this)'></i></td>";
-					row += "<td class='text-center'> <i class='fa fa-trash' data-uniqueId='"+list[i].id+"'  onclick='deleteNote(this)'></i></td>";
-					//row += "<td>"+list[i].fromTimeSecond + "</td>";
-					//row += "<td>"+list[i].toTimeSecond + "</td>";
-					row += "</tr>"
-					rows+=row;
-				}
-				selector.innerHTML=rows;
-				
+				//var audioPlayer = document.querySelector("#audioPlayer");
+				//audioPlayer.currentTime = from;
+				player.seekTo(from);
+				player.pauseVideo();
+				isPause=true;
+				playIconUpdate(false);
+			}
+			
+		}
+		function toGoToTime()
+		{
+			var to=document.querySelector('#toTimeSecond').value;
+			if(!isEmpty(to))
+			{
+				//var audioPlayer = document.querySelector("#audioPlayer");
+				//audioPlayer.currentTime = to;
+				player.seekTo(to);
+				player.pauseVideo();
+				//audioPlayer.pause();
+				isPause=true;
+				playIconUpdate(false);
+			}
+		}
+
+		function playIconUpdate(val)
+		{
+			if(val)
+			{
+					document.querySelector('#playSlot i').classList.remove("fa-play-circle");
+					document.querySelector('#playSlot i').classList.add("fa-pause-circle");
+					document.querySelector("#play").classList.remove('fa-play');
+					document.querySelector("#play").classList.add('fa-pause');
 			}
 			else
 			{
-				selector.innerHTML="";
+					document.querySelector('#playSlot i').classList.add("fa-play-circle");
+					document.querySelector('#playSlot i').classList.remove("fa-pause-circle");
+					document.querySelector("#play").classList.add('fa-play');
+					document.querySelector("#play").classList.remove('fa-pause');
 			}
- }
-
-
-
-      document.getElementById('export').addEventListener('click', function() {
-		  var timestamp = new Date().getUTCMilliseconds();
-		  var now = new Date();
-
-			timestamp = now.getFullYear().toString(); // 2011
-			timestamp += (now.getMonth < 9 ? '0' : '') + now.getMonth().toString(); // JS months are 0-based, so +1 and pad with 0's
-			timestamp += ((now.getDate < 10) ? '0' : '') + now.getDate().toString(); // pad with a 0
-			timestamp += ((now.getHours < 10) ? '0' : '') + now.getHours().toString();
-			timestamp += ((now.getSeconds < 10) ? '0' : '') + now.getSeconds().toString();
-			timestamp += ((now.getSeconds < 10) ? '0' : '') + now.getSeconds().toString();
-
-         let data=document.querySelector('#AudioNoteBookTable');
-		 TableToExcel.convert(data, { // html code may contain multiple tables so here we are refering to 1st table tag
-			name: timestamp+ `_AudioNote.xlsx`, // fileName you could use any name
-			sheet: {
-				name: 'Audio Note' // sheetName
-			}
-		});
-      });
-  
-
-
+			
+		}
 
        var isPlay=false;
        function setLocalAudio()
@@ -244,23 +230,23 @@ function playIconUpdate(val)
 	   
 	   function speed(rate)
 	   {
-		   var audioPlayer = document.querySelector("#audioPlayer");
-           audioPlayer.playbackRate = rate; 
+		  
+		   player.setPlaybackRate(rate); 
 	   }
 	   
 	   function playAudio()
 	   {
-		  var audioPlayer = document.querySelector("#audioPlayer");
+		
 		  if(!isPlay)
 		  {
-			  audioPlayer.play();
+			  player.playVideo();
 			  document.querySelector("#play").classList.remove('fa-play');
 		      document.querySelector("#play").classList.add('fa-pause');
-			   isPlay=true;
+			  isPlay=true;
 		  }
 		  else
 		  {
-			  audioPlayer.pause();
+			  player.pauseVideo();
 			  isPlay=false;
 			  document.querySelector("#play").classList.add('fa-play');
 		      document.querySelector("#play").classList.remove('fa-pause');
@@ -269,28 +255,28 @@ function playIconUpdate(val)
 	   
 	   function backward()
 	   { 
-	       var audioPlayer = document.querySelector("#audioPlayer");
+	       
 		   var value = parseInt(document.querySelector("#forwardValue").value);
 		   if(!isEmpty(value))
 		   {
-			   audioPlayer.currentTime -= value;
+			var newTime=player.getCurrentTime()-value;
+			player.seekTo(newTime);
 		   }
 		   
 	   }
 	   function forward()
 	   {
-		   var audioPlayer = document.querySelector("#audioPlayer");
+	
 		   var value = parseInt(document.querySelector("#forwardValue").value);
 		   if(!isEmpty(value))
 		   {
-			   audioPlayer.currentTime += value;
+			var newTime=player.getCurrentTime()+value;
+			player.seekTo(newTime);
+		 
 		   }
 	   }
 	   
-	   function isEmpty(val)
-	   {
-         return (val === undefined || val == null || val.length <= 0) ? true : false;
-	   }
+	 
 	    
 		function isPlaySlotVisible()
 		{
@@ -302,34 +288,9 @@ function playIconUpdate(val)
 			 }
 		}
 		
-		function onFromClick()
+		function isEmpty(val)
 		{
-			 var audioPlayer = document.querySelector("#audioPlayer");
-			 var currentTime=audioPlayer.currentTime;
-			 var timeString= convertSecondstoTime(currentTime);
-			 document.querySelector('#fromTimeSecond').value  = currentTime; 
-			 document.querySelector('#fromTime').value  = timeString;
-			 
-			 isPlaySlotVisible();
-			 
-		
-		}
-		
-		
-		
-		
-		function onToClick()
-		{
-			 var audioPlayer = document.querySelector("#audioPlayer");
-			 var currentTime=audioPlayer.currentTime;
-			 var timeString= convertSecondstoTime(currentTime);
-			 document.querySelector('#toTimeSecond').value  = currentTime; 
-			 document.querySelector('#toTime').value  = timeString;
-			 
-			isPlaySlotVisible();
-			audioPlayer.pause();
-            isPause=true;
-			playIconUpdate(false);
+		  return (val === undefined || val == null || val.length <= 0) ? true : false;
 		}
 	     function convertSecondstoTime(given_seconds) { 
           
@@ -410,6 +371,10 @@ function playIconUpdate(val)
 			  return o && o[k]; // get inner property if `o` is defined else get `o` and return
 			}, obj1) // set initial value as object
 		}
+
+
+
+
 		function saveNote()
 		{
 		
@@ -529,7 +494,42 @@ function playIconUpdate(val)
 			localStorage.clear();
 			refreshGrid();
 		}
-		
+		function refreshGrid()
+		{
+				
+				   var list=[];
+				   var storageData=localStorage.getItem('audioData');
+				   var selector=document.querySelector('table tbody');
+				   if(!isEmpty(storageData))
+				   {
+					   
+					   list=JSON.parse(storageData);
+					   
+					   
+					   
+					   var rows="";
+					   for (i = 0; i < list.length; i++) {
+						   var row="<tr>"
+						   //row += "<td>"+list[i].id + "</td>";
+						   row += "<td>"+list[i].fromTime + "</td>";
+						   row += "<td>"+list[i].toTime + "</td>";
+						   row += "<td>"+list[i].description + "</td>";
+						   row += "<td class='text-center'> <i class='fa fa-pencil' data-uniqueId='"+list[i].id+"'  onclick='editNote(this)'></i></td>";
+						   row += "<td class='text-center'> <i class='fa fa-trash' data-uniqueId='"+list[i].id+"'  onclick='deleteNote(this)'></i></td>";
+						   //row += "<td>"+list[i].fromTimeSecond + "</td>";
+						   //row += "<td>"+list[i].toTimeSecond + "</td>";
+						   row += "</tr>"
+						   rows+=row;
+					   }
+					   selector.innerHTML=rows;
+					   
+				   }
+				   else
+				   {
+					   selector.innerHTML="";
+				   }
+		}
+		   
 	//Detect Browser or Tab Close Events
 $(window).on('beforeunload',function(e) {
   e = e || window.event; 
@@ -538,4 +538,24 @@ $(window).on('beforeunload',function(e) {
      var rate=audioPlayer.currentTime;
      localStorage.setItem('lastTime',rate);
 });	
+
+document.getElementById('export').addEventListener('click', function() {
+	var timestamp = new Date().getUTCMilliseconds();
+	var now = new Date();
+
+	  timestamp = now.getFullYear().toString(); // 2011
+	  timestamp += (now.getMonth < 9 ? '0' : '') + now.getMonth().toString(); // JS months are 0-based, so +1 and pad with 0's
+	  timestamp += ((now.getDate < 10) ? '0' : '') + now.getDate().toString(); // pad with a 0
+	  timestamp += ((now.getHours < 10) ? '0' : '') + now.getHours().toString();
+	  timestamp += ((now.getSeconds < 10) ? '0' : '') + now.getSeconds().toString();
+	  timestamp += ((now.getSeconds < 10) ? '0' : '') + now.getSeconds().toString();
+
+   let data=document.querySelector('#AudioNoteBookTable');
+   TableToExcel.convert(data, { // html code may contain multiple tables so here we are refering to 1st table tag
+	  name: timestamp+ `_AudioNote.xlsx`, // fileName you could use any name
+	  sheet: {
+		  name: 'Audio Note' // sheetName
+	  }
+  });
+});
 
