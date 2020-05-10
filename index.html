@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	 <link rel="icon" href="favicon.png" type="image/png" sizes="64x64">
-	<title>Audio Marker</title>
+	<title>Video Marker</title>
 	<!-- Mobile Specific Metas -->
   	<meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -42,7 +42,7 @@
 
 			<div class="card-body pt-3">
 			<div class="row pb-0">
-				<div class="col-6 row input-group">
+				<div class="col-md-6 row input-group col-sm-12">
 					
 					<input id="youtubeid" placeholder="Enter youtube id" type="text" class="form-control form-control-sm text-center" >
 					<div class="input-group-append">
@@ -51,7 +51,7 @@
 					</div>
 				</div>
 				
-				<div class="col-6 right">
+				<div class="col-md-6 right col-sm-12">
 					<span class="badge badge-secondary" type="button" onclick="speed(0.80)">Slow 0.80 <i class="fa fa-arrow-down"></i> </span>
 					<span class="badge badge-secondary" type="button" onclick="speed(1)">Normal 1.0 </span>
 					<span class="badge badge-secondary" type="button" onclick="speed(1.25)">Fast 1.25 <i class="fa fa-arrow-up"></i> </span>
@@ -75,12 +75,14 @@
 					<source src="" type="audio/mpeg">
 					Your browser does not support this type of audio. 
 				</audio>
+				
 				<div id="player"></div>
 			</div>
 			
 			<div class="row">
 			    <div class="col text-left">
 					<button class="btn btn-sm btn-secondary" type="button" onclick="playAudio()">Play &nbsp;<i id="play" class="fa fa-play"></i> </button>
+					<div class="d-inline mr-2"><span class="badge badge-light" style="font-size: 16px;" id="currentTime">00:00:00</span></div>     <!--  / <span style="font-size: 16px;"  class="badge badge-light" id="durationTime">00:00:00</span> -->
 					<button class="btn btn-sm btn-info d-none" id="playSlot" type="button" onclick="playStartEnd()"><i class="fa fa-play-circle fa-1x"></i> Note</button>
 				</div>
 			
