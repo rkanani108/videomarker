@@ -60,6 +60,8 @@
       // }
     // });
 
+  debugger;
+	var fileName=localStorage.getItem('filename');
 
 
 	var tag = document.createElement('script');
@@ -67,6 +69,12 @@
 	var firstScriptTag = document.getElementsByTagName('script')[0];
 	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 	
+
+	if(isEmpty(fileName))
+	{
+		fileName="tQVMK307h9E"
+	}
+	document.querySelector('#youtubeid').value=fileName;
 	// 3. This function creates an <iframe> (and YouTube player)
 	//    after the API code downloads.
 	var player;
@@ -74,27 +82,28 @@
 		player = new YT.Player('player', {
 			height: '315',
 			width: '560',
-			videoId: 'tQVMK307h9E',
+			videoId: fileName,
+			events: {
+				'onReady': onPlayerReady,
+			} 
+			
 		});
-		document.getElementById('resume').onclick = function() {
-			player.playVideo();
-		};
-		document.getElementById('pause').onclick = function() {
-			player.pauseVideo();
-		};
+	    
 	}
-
-
-
+	function onPlayerReady(event) {
+		var lastTime=localStorage.getItem('lastTime');
+		if(!isEmpty(lastTime))
+		{
+			player.seekTo(lastTime);
+			player.pauseVideo();
+		}
+    }
+	
 
 
 $( document ).ready(function() {
-         refreshGrid();
-		 var fileName=localStorage.getItem('filename');
-			if(!isEmpty(fileName))
-			{
-		      document.querySelector("#fname").innerText=fileName;
-			}
+		 refreshGrid();
+		
 });
 
 var isPause=true;
@@ -207,25 +216,23 @@ function onToClick()
        var isPlay=false;
        function setLocalAudio()
        {
-		    debugger;
-            var audioPlayer = document.querySelector("#audioPlayer");
-            var input = document.querySelector("input[type=file]");
-            var url = URL.createObjectURL(input.files[0]);
-            audioPlayer.src = url;
-          	
-			document.querySelector("#fname").innerText=input.files[0].name;
+		   debugger;
+	        var yid = document.querySelector("#youtubeid").value;
+			if(!isEmpty(yid))
+			{
+				player.loadVideoById(yid);
+			}
+			
+			var lastTime=localStorage.getItem('lastTime');
 			var oldFileName=localStorage.getItem("filename");
-		    var lastTime=localStorage.getItem('lastTime');
 			if(!isEmpty(lastTime))
 			{
-				if(!isEmpty(oldFileName) && (input.files[0].name === oldFileName))
+				if(!isEmpty(yid) && (yid === oldFileName))
 				{
-					audioPlayer.currentTime=lastTime;
+					player.seekTo(lastTime);
 				}
-				
 		    }
-			
-			localStorage.setItem("filename", input.files[0].name);
+			localStorage.setItem("filename", yid);
        }
 	   
 	   function speed(rate)
@@ -534,8 +541,8 @@ function onToClick()
 $(window).on('beforeunload',function(e) {
   e = e || window.event; 
   
-     var audioPlayer = document.querySelector("#audioPlayer");
-     var rate=audioPlayer.currentTime;
+   
+     var rate=player.getCurrentTime();
      localStorage.setItem('lastTime',rate);
 });	
 

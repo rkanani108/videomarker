@@ -41,11 +41,24 @@
 			
 
 			<div class="card-body pt-3">
-			
-				<span class="badge badge-secondary" type="button" onclick="speed(0.80)">Slow 0.80 <i class="fa fa-arrow-down"></i> </span>
-				<span class="badge badge-secondary" type="button" onclick="speed(1)">Normal 1.0 </span>
-				<span class="badge badge-secondary" type="button" onclick="speed(1.25)">Fast 1.25 <i class="fa fa-arrow-up"></i> </span>
-			
+			<div class="row pb-0">
+				<div class="col-6 row input-group">
+					
+					<input id="youtubeid" placeholder="Enter youtube id" type="text" class="form-control form-control-sm text-center" >
+					<div class="input-group-append">
+						<button class="btn btn-sm btn-info" type="button" onclick="setLocalAudio()">
+							<i class="fa fa-floppy-o"></i> Load</button>
+					</div>
+				</div>
+				
+				<div class="col-6 right">
+					<span class="badge badge-secondary" type="button" onclick="speed(0.80)">Slow 0.80 <i class="fa fa-arrow-down"></i> </span>
+					<span class="badge badge-secondary" type="button" onclick="speed(1)">Normal 1.0 </span>
+					<span class="badge badge-secondary" type="button" onclick="speed(1.25)">Fast 1.25 <i class="fa fa-arrow-up"></i> </span>
+		
+				</div>
+			</div>
+				
 			<div class="row input-group mt-3" style="display: none;">
 			  <div class="custom-file w-100">
 				<input type="file" class="custom-file-input" onchange="setLocalAudio()">
@@ -63,9 +76,7 @@
 					Your browser does not support this type of audio. 
 				</audio>
 				<div id="player"></div>
-				<a href="#" id="pause">Pause</a>
-				<a href="#" id="resume">Resume</a>
-		    </div>
+			</div>
 			
 			<div class="row">
 			    <div class="col text-left">
